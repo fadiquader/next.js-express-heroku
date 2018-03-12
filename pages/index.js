@@ -1,6 +1,8 @@
 import Link from 'next/link'
+import { Button } from 'antd';
 import Head from '../components/head'
 import Nav from '../components/nav'
+import '../styles/ant.less';
 
 export default () => (
   <div>
@@ -8,6 +10,7 @@ export default () => (
     <Nav />
 
     <div className="hero">
+      <Button onClick={() => console.log('antd works fine')}>Antd Button</Button>
       <h1 className="title">Welcome to Next!</h1>
       <p className="description">To get started, edit <code>pages/index.js</code> and save to reload.</p>
 
