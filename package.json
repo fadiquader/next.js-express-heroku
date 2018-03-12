@@ -4,7 +4,8 @@
     "dev": "next",
     "prestart": "next build",
     "build": "next build",
-    "start": "next start"
+    "start": "next start",
+    "heroku-postbuild": "npm run build"
   },
   "dependencies": {
     "next": "^5.0.0",
