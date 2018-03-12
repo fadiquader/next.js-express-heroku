@@ -2,7 +2,7 @@
   "name": "create-next-example-app",
   "scripts": {
     "dev": "next",
-    "prestart": "next build",
+    "prestart": "npm run build",
     "build": "next build",
     "start": "next start",
     "heroku-postbuild": "npm run build"
