@@ -5,7 +5,7 @@
     "prestart": "npm run build",
     "build": "next build",
     "heroku-postbuild": "npm run build",
-    "start": "node server/index.js -p $PORT"
+    "start": "NODE_ENV=production node server/index.js -p $PORT"
   },
   "dependencies": {
     "antd": "^3.3.0",
