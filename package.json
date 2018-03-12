@@ -4,10 +4,12 @@
     "dev": "next",
     "prestart": "npm run build",
     "build": "next build",
-    "start": "next start -p $PORT",
-    "heroku-postbuild": "npm run build"
+    "heroku-postbuild": "npm run build",
+    "start": "node server/index.js -p $PORT"
   },
   "dependencies": {
+    "antd": "^3.3.0",
+    "express": "^4.16.2",
     "next": "^5.0.0",
     "react": "^16.2.0",
     "react-dom": "^16.2.0"
