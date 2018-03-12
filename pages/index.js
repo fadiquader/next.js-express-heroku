@@ -1,6 +1,7 @@
+import fetch from 'isomorphic-fetch'
 import React from 'react';
 import Link from 'next/link'
-import { Button } from 'antd';
+import { Row, Col, Button, Checkbox, Table } from 'antd';
 import Head from '../components/head'
 import Nav from '../components/nav'
 import '../styles/ant.less';
@@ -85,6 +86,7 @@ class Home extends React.Component {
         ];
         return (
             <div className="container">
+                {/*<Head />*/}
               <Row type="flex" gutter={32}>
                 <Col span={0}>
                   <div>
