@@ -14,7 +14,10 @@ class Home extends React.Component {
         const res = await fetch(`https://jsonplaceholder.typicode.com/comments`);
         const data = await res.json();
         return {
-            data
+            data: data.map(i => {
+                i.isDeleted = Math.random() >= 0.5
+                return i
+            })
         }
     }
 
@@ -22,7 +25,7 @@ class Home extends React.Component {
         super(props);
         this.state = {
             filters: {
-                completed: false,
+                isDeleted: false,
             },
             data: props.data
         };
@@ -32,7 +35,7 @@ class Home extends React.Component {
     }
 
     onSortChange(e){
-        console.log(e.target.checked, e.target.name)
+        // console.log(e.target.checked, e.target.name)
         this.setState({
             sortedInfo: {
                 order: !e.target.checked ? 'descend' : 'ascend',
@@ -43,12 +46,14 @@ class Home extends React.Component {
 
     onfilterChange(e) {
         const filters = {};
-        filters[e.target.name] = e.target.checked;
+        const filterName = e.target.name
+        filters[filterName] = e.target.checked;
         const data = [];
         this.props.data.map((record) => {
-            if(!filters.completed) return data.push(record);
-            if(filters.completed === record.completed)  return data.push(record);
+            if(!filters.isDeleted) return data.push(record);
+            if(filters.isDeleted === record.isDeleted)  return data.push(record);
         });
+
         this.setState(prev => ({
             filters: { ...prev.filters, ...filters },
             data: data
@@ -77,23 +82,28 @@ class Home extends React.Component {
                 dataIndex: 'body',
                 key: 'body',
             },
-            // {
-            // title: 'Completed',
-            // dataIndex: 'completed',
-            // key: 'completed',
-            // render: (text, record) => `${text}`
-            // }
+            {
+            title: 'Deleted',
+            dataIndex: 'isDeleted',
+            key: 'isDeleted',
+            render: (text, record) => `${text}`
+            }
         ];
         return (
             <div className="container">
                 {/*<Head />*/}
               <Row type="flex" gutter={32}>
-                <Col span={0}>
+                <Col span={3}>
                   <div>
-                      {/*<Checkbox name="completed" onChange={this.onfilterChange}>Filter by completed</Checkbox>*/}
+                      <Checkbox name="isDeleted" onChange={this.onfilterChange}>Filter by Deleted comments</Checkbox>
                   </div>
                 </Col>
-                <Col span={24}>
+                <Col span={21}>
+                    <div>
+                        <h1>Data count: {this.props.data.length}</h1>
+                        <h1>Data count after filter: {this.state.data.length}</h1>
+                    </div>
+                    <br/>
                   <Table
                       pagination={false}
                       columns={columns}
